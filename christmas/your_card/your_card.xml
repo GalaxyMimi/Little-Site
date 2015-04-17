@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+||| Instructions Card Christmas |||
+
+MESSAGE
+If you want to override the message, just type what you want and between <your_message> and </ your_message>. Just press enter to give a line break.
+
+LOGO
+Paste the logo you want to use in the "your_card", and enter the file name and between <your_logo> and </ your_logo>. Remember to enter the file extension, such as. Png or. Jpg.
+Example: logo_yourcompany.png
+
+SITE
+Enter the company's website between <your_site> and <your_site> and do not put "http://" because it gets ugly.
+Example: yourcompany.com
+
+URL
+You put the address of the site, or landing page between <your_url> and </ your_url>. In this field you put "http://", and can even change the url.
+Example: http://www.yourcompany.com/contact/index.html
+
+-->
+
+<your_card>
+
+	<your_message>Merry Christmas
+
+	愿这美丽的圣诞贺卡
+	带给你我深切的关怀与祝福
+
+	李卓立
+	</your_message>
+
+	<your_logo>logo_yourcompany.png</your_logo>
+		    
+	<your_site>小猪的博客</your_site>
+    
+	<your_url>http://www.dreampiggy.com</your_url>
+	
+</your_card>
