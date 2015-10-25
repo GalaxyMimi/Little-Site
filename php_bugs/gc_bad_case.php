@@ -1,15 +1,14 @@
 <?php
-
 /*
-PHP use reference count to manager object life. And have GC for cyclic	reference
+PHP use reference count to manager object life. And have GC for cyclic reference
 
-Every function call or unset() will decrease ref count
+Every end of scope (such as function call) or unset() will decrease ref count
 for ZValue such as ZObject and ZArray, which will check if it's root in ref linked list
 this will happen during ref decreasement
 
 But Zend engine set root buffer max default to 10000
 So if you just create more than 10000 ZValue and later cause ref decrease
-This will force Zend engine do deep-first mark-and-swap each time your ref decrease
+This will force Zend engine do deepth-first mark-and-swap each time your ref decrease
 
 See the `zend_gc.c` line 190 - 242
 some logic:
@@ -28,15 +27,15 @@ So sometime we will meet bad case of GC, see the example
 gc_enable();	//This will control whether to use GC for cyclic reference
 
 function doSomething($value) {
-	//Do anything. Remember end of scrope will decrease ref count
+	//Do anything. Remember end of scope will decrease ref count
 }
 
 $array = array();
-$start = microtime(true);	//time counter
-for ($i = 0;$i < 100000; $i++) {	//first generate more than 10000 objects reference
-	$array[] = new stdClass();	//just use base object generate reference
+$start = microtime(true);	//Time counter
+for ($i = 0;$i < 100000; $i++) {	//First generate more than 10000 objects
+	$array[] = new stdClass();	//Just new stdClass(which is php base object) to generate references
 }
-foreach ($array as $value) {	//call function to decrease ref count
+foreach ($array as $value) {	//Call function to decrease ref count
 	doSomething($value);
 }
 var_dump(microtime(true) - $start);
@@ -53,4 +52,8 @@ foreach ($array as $value) {
 }
 var_dump(microtime(true) - $start);
 
+/*Result:
+gc_enable: float(0.093602895736694)
+gc_disable: float(0.054068088531494)
+*/
 ?>
